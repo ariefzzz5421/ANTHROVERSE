@@ -7,7 +7,7 @@ export function ExhibitImage({
   sizes = "(max-width: 760px) 100vw, 50vw",
 }: {
   image: ImageAsset;
-  caption: string;
+  caption?: string;
   sizes?: string;
 }) {
   return (
@@ -23,7 +23,7 @@ export function ExhibitImage({
         />
       </div>
       <figcaption>
-        <span>{caption}</span>
+        <span>{caption ?? image.caption ?? image.alt}</span>
         <span className="image-credit">
           <a href={image.sourceUrl} target="_blank" rel="noopener noreferrer">
             {image.credit}

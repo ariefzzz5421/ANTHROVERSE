@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { SpeciesExplorer } from "@/components/species-explorer";
 import { Breadcrumb } from "@/components/common";
+import { EvolutionTrail } from "@/components/evolution-trail";
+import { evolutionTrail, parallelBranch } from "@/lib/evolution-trail";
 export const metadata: Metadata = {
   alternates: { canonical: "/evolution" },
   title: "Hominin Encyclopedia",
@@ -15,14 +17,15 @@ export default function EvolutionPage() {
       </div>
       <section className="page-hero">
         <div className="container">
-          <span className="eyebrow">Gallery 02 / Life</span>
+          <span className="eyebrow">Human evolution</span>
           <h1>A family of many branches.</h1>
           <p>
-            Explore fossils, geography, and debates across the hominin tree.
-            Similarity does not prove direct ancestry; many lineages overlapped.
+            Explore the fossils, then compare the branches. Many lineages lived
+            alongside one another.
           </p>
         </div>
       </section>
+      <EvolutionTrail nodes={evolutionTrail} branch={parallelBranch} />
       <section className="section">
         <div className="container">
           <SpeciesExplorer />

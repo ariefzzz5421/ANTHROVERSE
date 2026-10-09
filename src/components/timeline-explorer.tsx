@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useRef, useState, useEffect } from "react";
+import { Fragment, useMemo, useRef, useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import {
   Minus,
@@ -16,6 +16,7 @@ import {
   getSources,
 } from "@/lib/content";
 import { TimeScale } from "@/components/time-scale";
+import { ExhibitImage } from "@/components/exhibit-image";
 import type { TimelineEvent } from "@/lib/types";
 const kinds = ["all", "life", "biology", "culture", "society", "technology"];
 export function TimelineExplorer() {
@@ -63,9 +64,8 @@ export function TimelineExplorer() {
         <div>
           <span className="eyebrow">How to read this</span>
           <p>
-            Choose a segment of time, then pan horizontally or use the arrows.
-            Zoom changes card spacing for close reading. The segments
-            deliberately have different time scales.
+            Follow → from older to newer. Scroll or use the controls to move;
+            each segment has its own time scale. Arrows show order, not ancestry.
           </p>
         </div>
         <strong>Biology ≠ culture</strong>
@@ -123,8 +123,7 @@ export function TimelineExplorer() {
       </div>
       <div className="timeline-toolbar">
         <span>
-          {filtered.length} milestone{filtered.length !== 1 ? "s" : ""} · dates
-          approximate unless noted
+          {filtered.length} milestone{filtered.length !== 1 ? "s" : ""} · older → newer
         </span>
         <div>
           <button
@@ -166,29 +165,33 @@ export function TimelineExplorer() {
         >
           <div className="timeline-track">
             {filtered.map((event, i) => (
-              <button
-                className={`timeline-event ${selected?.id === event.id ? "selected" : ""}`}
-                style={{ width: `${Math.round(245 * zoom)}px` }}
-                key={event.id}
-                onClick={() => setSelected(event)}
-              >
-                <span className="timeline-point" />
-                <span className="timeline-date">
-                  {formatYears(event.yearsAgo)}
-                </span>
-                <span className="timeline-index">
-                  {String(i + 1).padStart(2, "0")} / {event.kind.toUpperCase()}
-                </span>
-                <strong>{event.title}</strong>
-                <small>{event.summary}</small>
-                <span className="timeline-status">
-                  {event.evidenceStatus === "debated"
-                    ? "◇ Debated interpretation"
-                    : event.evidenceStatus === "estimated"
-                      ? "~ Estimated date"
-                      : "Curated context"}
-                </span>
-              </button>
+              <Fragment key={event.id}>
+                <button
+                  className={`timeline-event ${selected?.id === event.id ? "selected" : ""}`}
+                  style={{ width: `${Math.round(245 * zoom)}px` }}
+                  onClick={() => setSelected(event)}
+                >
+                  <span className="timeline-point" />
+                  <span className="timeline-date">
+                    {formatYears(event.yearsAgo)}
+                  </span>
+                  <span className="timeline-index">
+                    {String(i + 1).padStart(2, "0")} / {event.kind.toUpperCase()}
+                  </span>
+                  <strong>{event.title}</strong>
+                  <small>{event.summary}</small>
+                  <span className="timeline-status">
+                    {event.evidenceStatus === "debated"
+                      ? "◇ Debated interpretation"
+                      : event.evidenceStatus === "estimated"
+                        ? "~ Estimated date"
+                        : "Curated context"}
+                  </span>
+                </button>
+                {i < filtered.length - 1 && (
+                  <span className="timeline-sequence-arrow" aria-hidden="true">→</span>
+                )}
+              </Fragment>
             ))}
           </div>
         </div>
@@ -230,9 +233,19 @@ export function TimelineExplorer() {
                 </li>
               ))}
             </ul>
-            <p className="small-note">
-              Image gallery: Evidence not yet available for this milestone.
-            </p>
+            {selected.images.length ? (
+              <div className="event-images">
+                {selected.images.map((image) => (
+                  <ExhibitImage
+                    key={image.src}
+                    image={image}
+                    sizes="(max-width: 650px) 100vw, 360px"
+                  />
+                ))}
+              </div>
+            ) : (
+              <p className="small-note">Verified exhibit image: Evidence not yet available.</p>
+            )}
           </div>
         </div>
       )}

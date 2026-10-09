@@ -80,11 +80,6 @@ export default async function SpeciesPage({
               <ExhibitImage
                 key={image.src}
                 image={image}
-                caption={
-                  s.slug === "australopithecus-afarensis"
-                    ? "Lucy museum cast · fossil evidence is incomplete"
-                    : "Sangiran II · original Homo erectus fossil"
-                }
                 sizes="(max-width: 900px) 100vw, 680px"
               />
             ))}

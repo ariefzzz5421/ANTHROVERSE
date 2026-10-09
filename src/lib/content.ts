@@ -10,6 +10,7 @@ import type {
   MigrationRoute,
   ComparisonTopic,
   Simulation,
+  ImageAsset,
 } from "./types";
 import { contentSchemas, sourceSchema } from "./types";
 import { formatYears } from "./time";
@@ -39,6 +40,63 @@ export const sources: Source[] = [
     confidence: "high",
     reviewed,
   },
+  {
+    id: "nature-tiktaalik",
+    title: "The pectoral fin of Tiktaalik roseae and the origin of the tetrapod limb",
+    author: "Neil Shubin, Edward Daeschler, and Farish Jenkins",
+    publisher: "Nature",
+    published: "2006-04-06",
+    url: "https://doi.org/10.1038/nature04637",
+    evidenceType: "peer-reviewed fossil research",
+    confidence: "high",
+    reviewed: "2026-10-09",
+  },
+  {
+    id: "uchicago-branches",
+    title: "‘Missing links’ of evolution, explained",
+    author: "University of Chicago News",
+    publisher: "University of Chicago",
+    url: "https://news.uchicago.edu/explainer/missing-links-evolution-explained",
+    evidenceType: "university research explainer",
+    confidence: "high",
+    reviewed: "2026-10-09",
+  },
+  {
+    id: "pnas-aegyptopithecus",
+    title: "A remarkable female cranium of the early Oligocene anthropoid Aegyptopithecus zeuxis",
+    author: "Erik Seiffert and colleagues",
+    publisher: "Proceedings of the National Academy of Sciences",
+    published: "2007",
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC1885571/",
+    evidenceType: "peer-reviewed fossil research",
+    confidence: "high",
+    reviewed: "2026-10-09",
+  },
+  {
+    id: "smith-genetics",
+    title: "Genetics and the human family tree",
+    author: "Human Origins Program",
+    publisher: "Smithsonian Institution",
+    url: "https://humanorigins.si.edu/evidence/genetics",
+    evidenceType: "museum research synthesis",
+    confidence: "high",
+    reviewed: "2026-10-09",
+  },
+  ...[
+    ["smith-sahel", "Sahelanthropus tchadensis", "sahelanthropus-tchadensis"],
+    ["smith-afarensis", "Australopithecus afarensis", "australopithecus-afarensis"],
+    ["smith-erectus", "Homo erectus", "homo-erectus"],
+    ["smith-sapiens", "Homo sapiens", "homo-sapiens"],
+  ].map(([id, title, slug]) => ({
+    id,
+    title,
+    author: "Human Origins Program",
+    publisher: "Smithsonian Institution",
+    url: `https://humanorigins.si.edu/evidence/human-fossils/species/${slug}`,
+    evidenceType: "fossil research synthesis",
+    confidence: "high" as const,
+    reviewed: "2026-10-09",
+  })),
   {
     id: "nhm-life",
     title: "The origin of life on Earth",
@@ -518,6 +576,19 @@ const speciesRows: SpeciesRow[] = [
     "nhm-origin",
   ],
 ];
+const speciesResearchSource: Record<string, string> = {
+  "sahelanthropus-tchadensis": "smith-sahel",
+  "australopithecus-afarensis": "smith-afarensis",
+  "homo-erectus": "smith-erectus",
+  "homo-sapiens": "smith-sapiens",
+};
+const speciesImages: Record<string, ImageAsset> = {
+  "sahelanthropus-tchadensis": exhibitImages.sahelanthropusCast,
+  "australopithecus-afarensis": exhibitImages.lucyCast,
+  "homo-erectus": exhibitImages.sangiran,
+  "homo-neanderthalensis": exhibitImages.neanderthalCast,
+  "homo-sapiens": exhibitImages.sapiensSkull,
+};
 export const species: Species[] = speciesRows.map(
   ([
     slug,
@@ -539,15 +610,12 @@ export const species: Species[] = speciesRows.map(
       title,
       `${title} lived approximately ${formatYears(older)}–${formatYears(younger)}.`,
       "species",
-      [source],
+      speciesResearchSource[slug]
+        ? [source, speciesResearchSource[slug]]
+        : [source],
       `${title} is one branch of a diverse human family tree. Fossils, archaeology, and sometimes genetics provide different kinds of evidence.`,
     ),
-    images:
-      slug === "homo-erectus"
-        ? [exhibitImages.sangiran]
-        : slug === "australopithecus-afarensis"
-          ? [exhibitImages.lucyCast]
-          : [],
+    images: speciesImages[slug] ? [speciesImages[slug]] : [],
     scientificName: title,
     dateRange: [older, younger],
     region,
@@ -595,6 +663,16 @@ const eventRows: EventRow[] = [
     "estimated",
   ],
   [
+    "tiktaalik",
+    "Tiktaalik and early tetrapod relatives",
+    375_000_000,
+    "deep-life",
+    "biology",
+    "Tiktaalik shows a mosaic of fish and tetrapod traits. It is evidence of a wider transition, not a proven direct human ancestor.",
+    ["nature-tiktaalik", "uchicago-branches"],
+    "estimated",
+  ],
+  [
     "mammal-diversification",
     "Mammals diversify",
     66_000_000,
@@ -602,6 +680,16 @@ const eventRows: EventRow[] = [
     "biology",
     "After the end-Cretaceous extinction, mammals diversified; primate-like mammals appear later in the Palaeogene.",
     ["nhm-cretaceous"],
+    "estimated",
+  ],
+  [
+    "aegyptopithecus",
+    "Aegyptopithecus and early catarrhines",
+    30_000_000,
+    "primates",
+    "biology",
+    "Fossils from Egypt document a stem catarrhine near the broader history of monkeys and apes; direct ancestry is not established.",
+    ["pnas-aegyptopithecus"],
     "estimated",
   ],
   [
@@ -755,20 +843,31 @@ const eventRows: EventRow[] = [
     "illustrative",
   ],
 ];
+const timelineImages: Record<string, ImageAsset> = {
+  tiktaalik: exhibitImages.tiktaalikDisplay,
+  aegyptopithecus: exhibitImages.aegyptopithecusDisplay,
+  "early-hominins": exhibitImages.sahelanthropusCast,
+  australopithecines: exhibitImages.lucyCast,
+  sangiran: exhibitImages.sangiran,
+  neanderthals: exhibitImages.neanderthalCast,
+  sapiens: exhibitImages.sapiensSkull,
+};
+const timelineSpecies: Record<string, string> = {
+  "early-hominins": "sahelanthropus-tchadensis",
+  australopithecines: "australopithecus-afarensis",
+  sangiran: "homo-erectus",
+  neanderthals: "homo-neanderthalensis",
+  sapiens: "homo-sapiens",
+  flores: "homo-floresiensis",
+};
 export const timelineEvents: TimelineEvent[] = eventRows.map(
   ([slug, title, yearsAgo, eraId, kind, summary, sourceIds, status]) => ({
     ...base(slug, title, summary, kind, sourceIds),
+    images: timelineImages[slug] ? [timelineImages[slug]] : [],
     yearsAgo,
     eraId,
     kind,
-    speciesIds:
-      slug === "sangiran"
-        ? ["homo-erectus"]
-        : slug === "sapiens"
-          ? ["homo-sapiens"]
-          : slug === "flores"
-            ? ["homo-floresiensis"]
-            : [],
+    speciesIds: timelineSpecies[slug] ? [timelineSpecies[slug]] : [],
     evidenceStatus: status as TimelineEvent["evidenceStatus"],
   }),
 );

@@ -22,8 +22,8 @@ npm run build
 
 ## Collections
 
-- `/timeline` — segmented deep-time timeline with search, filters, zoom, pan, logarithmic position guide, event details, and citations.
-- `/evolution` — twelve hominin dossiers and side-by-side species comparison.
+- `/timeline` — segmented deep-time timeline with chronological arrows, search, filters, zoom, pan, evidence photographs, event details, and citations.
+- `/evolution` — interactive fossil evidence diagram, twelve hominin dossiers, and side-by-side species comparison. Diagram arrows indicate chronological order, **not direct ancestry**; Neanderthals appear as a parallel branch.
 - `/cultures` — sixteen introductory cultural anthropology topics.
 - `/behavior` — four evidence-aware concept modules.
 - `/migration` — lazy-loaded geographic atlas with schematic uncertainty bands and accessible site descriptions.
@@ -42,8 +42,13 @@ Photograph credits and license links are displayed beside each image in the app 
 | --- | --- | --- | --- |
 | Sangiran II original *Homo erectus* calvarium | [Gerbil / Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Calvaria_Sangiran_II_(C).jpg) | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) | Resized and converted to WebP |
 | Lucy *Australopithecus afarensis* museum cast | [Daderot / Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Australopithecus_afarensis_(Lucy)_cast_-_Naturmuseum_Senckenberg_-_DSC02089.JPG) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | Resized and converted to WebP |
+| *Tiktaalik roseae* museum display; original/cast status not specified | [Ghedoghedo / Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Tiktaalik_roseae.jpg) | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) | Resized and converted to WebP |
+| *Aegyptopithecus* museum skull and jaw display; original/cast status not specified | [Guérin Nicolas / Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Aegyptopithecus_skull_(University_of_Zurich)-1.JPG) | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) | Resized and converted to WebP |
+| Toumaï *Sahelanthropus* cranium cast | [Didier Descouens / Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Sahelanthropus_tchadensis_-_TM_266-01-060-1.jpg) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | Resized and converted to WebP |
+| Neanderthal 1 skullcap cast | [Gunnar Creutz / Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Homo_neanderthalensis_(cast_of_Neanderthal_1_skullcap)_at_G%C3%B6teborgs_Naturhistoriska_Museum_8790.jpg) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | Resized and converted to WebP |
+| Recent *Homo sapiens* skull, not an earliest fossil | [Tiia Monto / Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Homo_sapiens_skull.jpg) | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) | Resized and converted to WebP |
 
-The Lucy photograph shows a **cast**, not the original fossil. Neither photograph is presented as a full body reconstruction.
+These are photographs of objects or specimens, not full-body reconstructions. Cast status is named where verified; unknown status is left unknown. Scientific claims are supported by linked research records separately from photo licenses.
 
 ## Research and product limits
 

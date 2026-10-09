@@ -17,11 +17,10 @@ export default function TimelinePage() {
       <section className="page-hero">
         <div className="container">
           <span className="eyebrow">Gallery 01 / Time</span>
-          <h1>Humanity in deep time.</h1>
+          <h1>Life to the present.</h1>
           <p>
-            From the earliest evidence of life to the digital age. Zoom into one
-            chapter at a time and follow the evidence, including its
-            uncertainties.
+            Follow the evidence through deep time, human evolution, and culture.
+            Dates are approximate where marked.
           </p>
         </div>
       </section>
@@ -32,17 +31,13 @@ export default function TimelinePage() {
           </Suspense>
           <div className="tree-panel">
             <div>
-              <span className="eyebrow">
-                Evolutionary tree / interpretive guide
-              </span>
+              <span className="eyebrow">Evolutionary tree</span>
               <h2 className="serif">
-                Many branches.
-                <br />
-                Some connections unresolved.
+                Many branches.<br />Few simple lines.
               </h2>
               <p>
-                These labels show broad groups, not proven parent–child lines.
-                Fossil discoveries and genetic evidence keep changing the tree.
+                These groups are not proven parent–child links. Some relationships
+                remain debated.
               </p>
             </div>
             <div

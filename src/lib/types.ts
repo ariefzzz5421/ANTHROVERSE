@@ -16,6 +16,7 @@ export type EvidenceStatus =
 export type ImageAsset = {
   src: string;
   alt: string;
+  caption?: string;
   credit: string;
   license: string;
   sourceUrl?: string;
@@ -125,6 +126,7 @@ const dateRange = z
 const imageSchema = z.object({
   src: z.string().min(1),
   alt: z.string().min(1),
+  caption: z.string().min(1).optional(),
   credit: z.string().min(1),
   license: z.string().min(1),
   sourceUrl: z.url().optional(),
