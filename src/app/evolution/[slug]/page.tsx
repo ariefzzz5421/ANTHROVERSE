@@ -10,6 +10,7 @@ import {
 } from "@/components/common";
 import { ArticleSchema } from "@/components/article-schema";
 import { StudyLevel } from "@/components/study-level";
+import { ExhibitImage } from "@/components/exhibit-image";
 export function generateStaticParams() {
   return species.map((s) => ({ slug: s.slug }));
 }
@@ -75,12 +76,26 @@ export default async function SpeciesPage({
               {s.anatomy}. Estimated brain volume: {s.brainVolume}
             </p>
             <p>{s.behavior}</p>
+            {s.images.map((image) => (
+              <ExhibitImage
+                key={image.src}
+                image={image}
+                caption={
+                  s.slug === "australopithecus-afarensis"
+                    ? "Lucy museum cast · fossil evidence is incomplete"
+                    : "Sangiran II · original Homo erectus fossil"
+                }
+                sizes="(max-width: 900px) 100vw, 680px"
+              />
+            ))}
             <h2>What remains unsettled</h2>
             <p>{s.debate}</p>
-            <p className="small-note">
-              Images: Evidence not yet available. We avoid invented
-              reconstructions and unlicensed specimen photography.
-            </p>
+            {s.images.length === 0 && (
+              <p className="small-note">
+                Images: Evidence not yet available. We avoid invented
+                reconstructions and unlicensed specimen photography.
+              </p>
+            )}
             <Sources ids={s.sourceIds} />
             <hr className="rule" />
             <Link className="button-link" href="/evolution">

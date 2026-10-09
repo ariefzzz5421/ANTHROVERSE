@@ -14,6 +14,7 @@ import type {
 import { contentSchemas, sourceSchema } from "./types";
 import { formatYears } from "./time";
 import { models } from "./simulation";
+import { exhibitImages } from "./exhibit-images";
 export { formatYears } from "./time";
 
 const reviewed = "2026-10-08";
@@ -541,6 +542,12 @@ export const species: Species[] = speciesRows.map(
       [source],
       `${title} is one branch of a diverse human family tree. Fossils, archaeology, and sometimes genetics provide different kinds of evidence.`,
     ),
+    images:
+      slug === "homo-erectus"
+        ? [exhibitImages.sangiran]
+        : slug === "australopithecus-afarensis"
+          ? [exhibitImages.lucyCast]
+          : [],
     scientificName: title,
     dateRange: [older, younger],
     region,
@@ -1221,6 +1228,7 @@ export const fossilSites: FossilSite[] = [
       "site",
       ["unesco-sangiran"],
     ),
+    images: [exhibitImages.sangiran],
     coordinates: [110.83, -7.45],
     region: "Indonesia",
     yearsAgo: 1_500_000,

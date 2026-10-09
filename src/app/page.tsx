@@ -9,7 +9,10 @@ import {
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/reveal";
 import { ResearchSpotlight } from "@/components/research-spotlight";
-import { sources } from "@/lib/content";
+import { ExhibitImage } from "@/components/exhibit-image";
+import { DeepTimeExhibit } from "@/components/deep-time-exhibit";
+import { exhibitImages } from "@/lib/exhibit-images";
+import { sources, timelineEvents, formatYears } from "@/lib/content";
 import type { Metadata } from "next";
 export const metadata: Metadata = { alternates: { canonical: "/" } };
 const exhibits = [
@@ -60,6 +63,16 @@ const exhibits = [
     "/timeline?event=digital",
   ],
 ];
+const deepTimeStops = ["earth-forms", "early-hominins", "sapiens", "agriculture"].map((id) => {
+  const event = timelineEvents.find((item) => item.id === id)!;
+  return {
+    id,
+    title: event.title,
+    date: formatYears(event.yearsAgo),
+    summary: event.summary,
+    kind: event.kind,
+  };
+});
 export default function Home() {
   return (
     <main>
@@ -122,6 +135,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <DeepTimeExhibit stops={deepTimeStops} />
       <section className="section">
         <div className="container">
           <div className="section-head">
@@ -184,11 +198,11 @@ export default function Home() {
               </a>
             </p>
           </div>
-          <Reveal className="feature-graphic">
-            <span>AFRICA</span>
-            <span className="feature-line" />
-            <span>JAVA</span>
-            <p>Broad dispersal · route uncertain</p>
+          <Reveal>
+            <ExhibitImage
+              image={exhibitImages.sangiran}
+              caption="Sangiran II · an original Homo erectus calvarium from Java"
+            />
           </Reveal>
         </div>
       </section>

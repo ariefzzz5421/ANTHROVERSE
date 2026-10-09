@@ -19,6 +19,8 @@ export type ImageAsset = {
   credit: string;
   license: string;
   sourceUrl?: string;
+  licenseUrl?: string;
+  note?: string;
 };
 export type BaseItem = {
   id: string;
@@ -126,6 +128,8 @@ const imageSchema = z.object({
   credit: z.string().min(1),
   license: z.string().min(1),
   sourceUrl: z.url().optional(),
+  licenseUrl: z.url().optional(),
+  note: z.string().optional(),
 });
 const baseSchema = z.object({
   id: z.string().min(1),

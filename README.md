@@ -32,7 +32,18 @@ npm run build
 
 Source records and reusable catalog data live in `src/lib/content.ts`; content types live in `src/lib/types.ts`. Deep-time and calendar-year utilities live in `src/lib/time.ts`. Content records are validated against the source schema and checked for broken source references when loaded.
 
-The generated entrance artwork is `public/museum-panorama.webp`. It is atmospheric artwork, not an anatomical reconstruction. MapLibre's self-hosted worker and its license are in `public/`.
+The generated entrance artwork is `public/museum-panorama.webp`. It is atmospheric artwork, not an anatomical reconstruction. The homepage's layered 3D object is also an illustrative sculpture; its spacing is not a time scale. Visitors can start it on demand, so its 3D code stays out of the initial page load. It stops rendering when idle, and a static exhibit is available without WebGL. MapLibre's self-hosted worker and its license are in `public/`.
+
+### Museum photographs
+
+Photograph credits and license links are displayed beside each image in the app and stored once in `src/lib/exhibit-images.ts`.
+
+| Exhibit | Photograph and source | License | Adaptation |
+| --- | --- | --- | --- |
+| Sangiran II original *Homo erectus* calvarium | [Gerbil / Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Calvaria_Sangiran_II_(C).jpg) | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) | Resized and converted to WebP |
+| Lucy *Australopithecus afarensis* museum cast | [Daderot / Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Australopithecus_afarensis_(Lucy)_cast_-_Naturmuseum_Senckenberg_-_DSC02089.JPG) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | Resized and converted to WebP |
+
+The Lucy photograph shows a **cast**, not the original fossil. Neither photograph is presented as a full body reconstruction.
 
 ## Research and product limits
 
